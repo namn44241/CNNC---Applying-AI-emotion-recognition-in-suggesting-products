@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang web bán hàng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            background-image: url('snowflake.png');
+            background-repeat: repeat;
+        }
+        header, nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        nav {
+            position: relative;
+            overflow: hidden;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            background-color: #08ff4e8e;
+        }
+        nav a:hover {
+            background-color: #bbb;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        .product {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 20px;
+            margin-top: 20px;
+        }
+        .product-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            background-color: #fff;
+            position: relative;
+            transition: transform 0.2s; /* Thêm hiệu ứng transition */
+        }
+        .product-item img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product-item h3 {
+            margin-top: 10px;
+        }
+        .product-item p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        .cart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background-color: #ddd;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #333;
+        }
+        .emotions-button {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+        
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .snowflake {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #c27f22;
+            border-radius: 50%;
+            animation: snowflakes-fall 10s linear infinite;
+        }
+        @keyframes snowflakes-fall {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var snowflakes = document.getElementsByClassName('snowflake');
+            for (var i = 0; i < snowflakes.length; i++) {
+                var scale = Math.random() * 1.5;
+                snowflakes[i].style.transform = 'scale(' + scale + ')';
+                snowflakes[i].style.left = Math.random() * 100 + 'vw';
+                snowflakes[i].style.animationDuration = (Math.random() + 1) * 10 + 's';
+            }
+        });
+    </script>
+    <header>
+        <h1>Trang web bán hàng</h1>
+    </header>
+    <nav>
+        <a href="#">Trang chủ</a>
+        <a href="#">Sản phẩm</a>
+        <a href="#">Liên hệ</a>
+        <a href="#">Máy ảnh</a>
+        <a href="#">Laptop</a>
+        <a href="#">Rau củ</a>
+        <input type="text" class="search-bar" placeholder="Tìm kiếm sản phẩm...">
+        <div class="cart">&#128722;<span id="cart-count">0</span></div> <!-- Thêm số mặt hàng vào giỏ -->
+        <button class="emotions-button">&#128515;</button>
+    </nav>
+    <div class="container">
+        <h2>Sản phẩm mới</h2>
+        <div class="product">
+            <div class="product-item">
+                <img src="product1.jpg" alt="Sản phẩm 1">
+                <h3>Sản phẩm 1</h3>
+                <p>Giá: $50</p>
+                <button class="add-to-cart">Thêm vào giỏ</button>
+            </div>
+            <div class="product-item">
+                <img src="product2.jpg" alt="Sản phẩm 2">
+                <h3>Sản phẩm 2</h3>
+                <p>Giá: $40</p>
+                <button class="add-to-cart">Thêm vào giỏ</button>
+            </div>
+            <div class="product-item">
+                <img src="product3.jpg" alt="Sản phẩm 3">
+                <h3>Sản phẩm 3</h3>
+                <p>Giá: $60</p>
+                <button class="add-to-cart">Thêm vào giỏ</button>
+            </div>
+            <!-- Thêm các sản phẩm khác tại đây -->
+        </div>
+    </div>
+
+    <script>
+        var cartCount = 0; // Biến đếm số mặt hàng trong giỏ
+        var cartCountElement = document.getElementById('cart-count'); // Phần tử hiển thị số mặt hàng trong giỏ
+
+        // Bắt sự kiện khi click vào nút "Thêm vào giỏ"
+        var addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                cartCount++; // Tăng số mặt hàng trong giỏ
+                cartCountElement.textContent = cartCount; // Cập nhật số mặt hàng trong giỏ trên giao diện
+            });
+        });
+
+        // Hiệu ứng rung khi di chuột vào sản phẩm
+        var productItems = document.querySelectorAll('.product-item');
+        productItems.forEach(function(item) {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)'; // Tăng kích thước sản phẩm lên
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)'; // Khôi phục kích thước sản phẩm
+            });
+        });
+    </script>
+</body>
+</html>
