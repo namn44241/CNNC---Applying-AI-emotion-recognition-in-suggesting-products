@@ -10,11 +10,11 @@
             margin: 0;
             padding: 0;
             background-color: #f9f9f9;
-            background-image: url('snowflake.png');
+            background-image: url('11.jpg');
             background-repeat: repeat;
         }
         header, nav {
-            background-color: #333;
+            background-color: #4b3471b6;
             color: #fff;
             padding: 10px;
             text-align: center;
@@ -38,6 +38,7 @@
             max-width: 1200px;
             margin: auto;
             padding: 20px;
+            position: relative; /* Thêm thuộc tính position để bảng có thể điều chỉnh vị trí tương đối */
         }
         .product {
             display: grid;
@@ -66,6 +67,12 @@
         }
         .search-bar {
             margin-bottom: 20px;
+            width: 100%; /* Thay đổi chiều rộng của ô tìm kiếm */
+            padding: 10px; /* Thêm padding */
+            font-size: 16px; /* Thay đổi kích thước chữ */
+            border: 1px solid #ccc; /* Thêm đường viền */
+            border-radius: 5px; /* Bo tròn các góc */
+            box-sizing: border-box; /* Đảm bảo rằng padding và border không làm tăng kích thước của ô */
         }
         .cart {
             position: absolute;
@@ -109,7 +116,7 @@
             position: absolute;
             width: 10px;
             height: 10px;
-            background-color: #c27f22;
+            background-color: #ffffff;
             border-radius: 50%;
             animation: snowflakes-fall 10s linear infinite;
         }
@@ -121,6 +128,22 @@
                 transform: translateY(100vh);
             }
         }
+
+        /* Thêm CSS cho bảng sticker */
+        .sticker-table {
+            position: absolute;
+            top: 50px; /* Điều chỉnh vị trí của bảng */
+            right: 10px; /* Điều chỉnh vị trí của bảng */
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Thêm shadow */
+            display: none; /* Ẩn bảng ban đầu */
+            z-index: 999; /* Đảm bảo bảng được hiển thị trên cùng */
+        }
+
+
     </style>
 </head>
 <body>
@@ -143,44 +166,166 @@
         });
     </script>
     <header>
-        <h1>Trang web bán hàng</h1>
+        <h1>SUPER COOL ONLINE STORE</h1>
     </header>
     <nav>
-        <a href="#">Trang chủ</a>
-        <a href="#">Sản phẩm</a>
-        <a href="#">Liên hệ</a>
-        <a href="#">Máy ảnh</a>
-        <a href="#">Laptop</a>
-        <a href="#">Rau củ</a>
-        <input type="text" class="search-bar" placeholder="Tìm kiếm sản phẩm...">
+        <a href="#">Đồ Công Nghệ</a>
+        <a href="#">Đồ Nội Thất</a>
+        <a href="#">Đồ Ăn</a>
+        <a href="#">Máy Ảnh</a>
+        <a href="#">Đồng Hồ</a>
+        <a href="#">Hàng Nông Sản</a>
         <div class="cart">&#128722;<span id="cart-count">0</span></div> <!-- Thêm số mặt hàng vào giỏ -->
-        <button class="emotions-button">&#128515;</button>
+        <button onclick="showStickerTable()" class="emotions-button">&#128515;</button> 
     </nav>
+
+    <nav>
+        <!-- Thêm id để dễ dàng xác định ô tìm kiếm -->
+        <input type="text" id="search-input" class="search-bar" placeholder="Tìm kiếm sản phẩm...">
+    </nav>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var searchInput = document.getElementById('search-input');
+            var productItems = document.querySelectorAll('.product-item');
+    
+            // Bắt sự kiện khi người dùng nhập vào ô tìm kiếm
+            searchInput.addEventListener('input', function () {
+                var searchTerm = searchInput.value.toLowerCase(); // Lấy giá trị nhập vào và chuyển thành chữ thường
+    
+                // Duyệt qua từng sản phẩm và ẩn hiện sản phẩm tùy thuộc vào kết quả tìm kiếm
+                productItems.forEach(function (item) {
+                    var productName = item.querySelector('h3').textContent.toLowerCase(); // Lấy tên sản phẩm và chuyển thành chữ thường
+                    var productPrice = item.querySelector('p').textContent.toLowerCase(); // Lấy giá sản phẩm và chuyển thành chữ thường
+                    var productDescription = item.querySelector('img').alt.toLowerCase(); // Lấy mô tả sản phẩm từ thuộc tính alt của ảnh và chuyển thành chữ thường
+                    
+                    // Kiểm tra nếu tên sản phẩm, giá hoặc mô tả chứa từ khóa tìm kiếm
+                    if (productName.includes(searchTerm) || productPrice.includes(searchTerm) || productDescription.includes(searchTerm)) {
+                        item.style.display = 'block'; // Hiển thị sản phẩm nếu tìm thấy kết quả
+                    } else {
+                        item.style.display = 'none'; // Ẩn sản phẩm nếu không tìm thấy kết quả
+                    }
+                });
+            });
+        });
+    </script>
+    
+
+
     <div class="container">
-        <h2>Sản phẩm mới</h2>
+        <h2 style="color:#ffffff; text-align: center;">SẢN PHẨM MỚI - DEAL SIÊU HỜI</h2>
         <div class="product">
             <div class="product-item">
-                <img src="product1.jpg" alt="Sản phẩm 1">
-                <h3>Sản phẩm 1</h3>
-                <p>Giá: $50</p>
+                <img src="1.jpg" width="75%" alt="Sản phẩm 1" >
+                <h3>Đĩa game</h3>
+                <p>Giá: $5.0</p>
                 <button class="add-to-cart">Thêm vào giỏ</button>
             </div>
             <div class="product-item">
-                <img src="product2.jpg" alt="Sản phẩm 2">
-                <h3>Sản phẩm 2</h3>
-                <p>Giá: $40</p>
+                <img src="2.jpg" width="65%" alt="Sản phẩm 2">
+                <h3>Vé xem phim</h3>
+                <p>Giá: $1.5</p>
                 <button class="add-to-cart">Thêm vào giỏ</button>
             </div>
             <div class="product-item">
-                <img src="product3.jpg" alt="Sản phẩm 3">
-                <h3>Sản phẩm 3</h3>
-                <p>Giá: $60</p>
+                <img src="3.jpg" width="92%" alt="Sản phẩm 3">
+                <h3>Khóa học trực tuyến</h3>
+                <p>Giá: $99</p>
                 <button class="add-to-cart">Thêm vào giỏ</button>
             </div>
-            <!-- Thêm các sản phẩm khác tại đây -->
+            <div class="product-item">
+                <img src="4.jpg" width="75%" alt="Sản phẩm 4">
+                <h3>Trà ấm</h3>
+                <p>Giá: $4.0</p>
+                <button class="add-to-cart">Thêm vào giỏ</button>
+            </div>
+            <div class="product-item">
+                <img src="5.png" width="75%" alt="Sản phẩm 5">
+                <h3>Bộ dụng cụ tập thể dục</h3>
+                <p>Giá: $15</p>
+                <button class="add-to-cart">Thêm vào giỏ</button>
+            </div>
+            <div class="product-item">
+                <img src="6.jpg" width="100%" alt="Sản phẩm 6">
+                <h3>Bộ dụng cụ Skin care</h3>
+                <p>Giá: $12</p>
+                <button class="add-to-cart">Thêm vào giỏ</button>
+            </div>
+            <div class="product-item">
+                <img src="7.jpg" width="100%" alt="Sản phẩm 7">
+                <h3>Tinh dầu bưởi</h3>
+                <p>Giá: $6.0</p>
+                <button class="add-to-cart">Thêm vào giỏ</button>
+            </div><div class="product-item">
+                <img src="8.jpg" width="100%" alt="Sản phẩm 8">
+                <h3>Đèn ngủ</h3>
+                <p>Giá: $7.0</p>
+                <button class="add-to-cart">Thêm vào giỏ</button>
+            </div><div class="product-item">
+                <img src="9.jpg" width="100%" alt="Sản phẩm 9">
+                <h3>Tai nghe chống ồn</h3>
+                <p>Giá: $199</p>
+                <button class="add-to-cart">Thêm vào giỏ</button>
+            </div><div class="product-item">
+                <img src="10.jpg" width="100%" alt="Sản phẩm 10">
+                <h3>Kính cận</h3>
+                <p>Giá: $49</p>
+                <button class="add-to-cart">Thêm vào giỏ</button>
+            </div>
         </div>
     </div>
 
+<!-- Thêm bảng sticker -->
+<div class="sticker-table">
+    <h3>Facial Emotion Recognition</h3>
+    <button onclick="openEmotionDetection()">Mở trang nhận diện cảm xúc</button>
+    <button onclick="closeEmotionDetection()">Đóng tab</button> <!-- Thêm nút đóng tab -->
+    <div class="emotion-table"></div> <!-- Thêm một div để chứa iframe -->
+</div>
+
+<script>
+    // Biến lưu trạng thái của tab
+    var emotionTabOpen = false;
+
+    // Hàm mở trang nhận diện cảm xúc và hiển thị trong iframe
+    function openEmotionDetection() {
+        // Kiểm tra nếu tab đã mở thì không mở lại
+        if (!emotionTabOpen) {
+            // Tạo thẻ iframe
+            var iframe = document.createElement('iframe');
+            iframe.src = 'http://192.168.102.8:5400/detect_emotion';
+            iframe.style.width = '100%';
+            iframe.style.height = '500px'; // Điều chỉnh chiều cao của iframe
+            iframe.style.border = 'none'; // Ẩn đường viền của iframe
+
+            // Lấy thẻ div chứa iframe
+            var emotionTable = document.querySelector('.emotion-table');
+
+            // Xóa nội dung cũ của thẻ div
+            emotionTable.innerHTML = '';
+
+            // Thêm iframe vào thẻ div
+            emotionTable.appendChild(iframe);
+
+            // Đặt trạng thái tab là mở
+            emotionTabOpen = true;
+        }
+    }
+
+    // Hàm đóng tab và bảng
+    function closeEmotionDetection() {
+        // Lấy thẻ div chứa iframe
+        var emotionTable = document.querySelector('.emotion-table');
+
+        // Xóa nội dung của thẻ div để ẩn iframe
+        emotionTable.innerHTML = '';
+
+        // Ẩn bảng
+        document.querySelector('.sticker-table').style.display = 'none';
+
+        // Đặt trạng thái tab là đóng
+        emotionTabOpen = false;
+    }
+</script>
     <script>
         var cartCount = 0; // Biến đếm số mặt hàng trong giỏ
         var cartCountElement = document.getElementById('cart-count'); // Phần tử hiển thị số mặt hàng trong giỏ
@@ -204,6 +349,12 @@
                 this.style.transform = 'scale(1)'; // Khôi phục kích thước sản phẩm
             });
         });
+
+        // Hàm hiển thị bảng sticker
+        function showStickerTable() {
+            var stickerTable = document.querySelector('.sticker-table');
+            stickerTable.style.display = 'block';
+        }
     </script>
 </body>
 </html>
